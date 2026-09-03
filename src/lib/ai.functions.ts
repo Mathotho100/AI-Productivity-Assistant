@@ -6,7 +6,7 @@ import { AI_MODEL, getGateway } from "./ai-gateway.server";
 
 function extractJson(text: string) {
   const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
-  const raw = (fenced ? fenced[1] : text).trim();
+  const raw = (fenced?.[1] ?? text).trim();
   const start = raw.search(/[[{]/);
   const end = Math.max(raw.lastIndexOf("}"), raw.lastIndexOf("]"));
   return JSON.parse(start >= 0 && end > start ? raw.slice(start, end + 1) : raw);
